@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/fish_bg">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2">
+
+        <FrameLayout
+            android:id="@+id/sea_animal_1_frame"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3">
+
+            <ImageView
+                android:id="@+id/sea_animal_1_a"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/sa_1_a"
+                android:visibility="invisible"
+
+                />
+
+            <ImageView
+                android:id="@+id/sea_animal_1_b"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_7sdp"
+                android:src="@drawable/sa_1_b"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/sea_animal_1_c"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/sa_1_c"
+                android:visibility="invisible"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sea_animal_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3">
+
+
+            <ImageView
+                android:id="@+id/sea_animal_2_a"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/sa_2_a"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/sea_animal_2_b"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_7sdp"
+                android:src="@drawable/sa_2_b"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/sea_animal_2_c"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/sa_2_c"
+                android:visibility="invisible"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sea_animal_3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.93"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3">
+
+
+            <ImageView
+                android:id="@+id/sea_animal_3_a"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/sa_3_a"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/sea_animal_3_b"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_7sdp"
+                android:src="@drawable/sa_3_b"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/sea_animal_3_c"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/sa_3_c"
+                android:visibility="invisible"
+                />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sea_animal_match_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.5">
+
+        <ImageView
+            android:id="@+id/sea_animal_match"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/veh_car2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.65"
+            app:layout_constraintHorizontal_bias="0.55"
+            android:padding="@dimen/_15sdp"
+            android:visibility="visible"
+            />
+        <ImageView
+            android:id="@+id/sea_animal_bubble"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bubble"
+            android:visibility="visible"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
