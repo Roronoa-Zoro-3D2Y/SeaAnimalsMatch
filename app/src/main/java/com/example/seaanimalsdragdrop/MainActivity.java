@@ -9,12 +9,18 @@ import androidx.core.widget.ImageViewCompat;
 import com.example.seaanimalsdragdrop.models.colourSources;
 import com.example.seaanimalsdragdrop.models.seaAnimals;
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     seaAnimals answerMatchAnimal;
 
-    int countUserWin=0;
+    String msg = "TESTING";
+    int userMatched = 0;
     int userMatch3Outlines=0;
+    int Games = 1;
     int i=0;
 
     @Override
@@ -51,36 +59,19 @@ public class MainActivity extends AppCompatActivity {
         //Make the Sea Animals List
         assignSeaAnimalList();
 
-/*
-        while(countUserWin<3){
+       start(Games);
 
-            //Shuffle the ColourList
-            Collections.shuffle(cs);
-
-            //Shuffle the Sea Animal List
-            Collections.shuffle(sas);
-
-            setAnswerMatch(0, sas.get(0));
-            //the answer match animal and the three outline animals are getting set
-            initialStates(0);
-
-            //onclick the bubble disappears
-            OnClickBubble();
-
-            //on the clicking on the sea animals
-            OnClickAnswerMatch(0);
-        }*/
-
-       start(0);
 
     }// OnCreate ends
 
     public void start(int i){
+        init();
         Collections.shuffle(cs);
-        setAnswerMatch(0,sas.get(i));
-        initialStates(i);
-        OnClickBubble();
-        OnClickAnswerMatch(i);
+        Collections.shuffle(sas);
+        setAnswerMatch(0,sas.get(0));
+        initialStates(0);
+        OnClickBubble(0);
+        userMatched = 0;
     }
 
 
@@ -102,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
         bubble.setVisibility(View.VISIBLE);
 
+        sea_animal_outline_1.setVisibility(View.INVISIBLE);
+           sea_animal_fill_1.setVisibility(View.INVISIBLE);
+           sea_animal_eyes_1.setVisibility(View.INVISIBLE);
+        sea_animal_outline_2.setVisibility(View.INVISIBLE);
+           sea_animal_fill_2.setVisibility(View.INVISIBLE);
+           sea_animal_eyes_2.setVisibility(View.INVISIBLE);
+        sea_animal_outline_3.setVisibility(View.INVISIBLE);
+           sea_animal_fill_3.setVisibility(View.INVISIBLE);
+           sea_animal_eyes_3.setVisibility(View.INVISIBLE);
     }
 
     public void assignColourList(){
@@ -139,13 +139,13 @@ public class MainActivity extends AppCompatActivity {
 
         // answer match and other three animals get set at the same time
         int temp=1;
-        /*answerMatchAnimal = sas.get(0);
-        //answer match is getting set here
-        setAnswerMatch(0,answerMatchAnimal);*/
-
 
         //sea animal one with color at ca.get(0)
         sea_animal_outline_1.setImageResource(sas.get(animalNumber).getSeaAnimalOutline());
+        ImageViewCompat.setImageTintList(sea_animal_outline_1,
+                ColorStateList.valueOf(getResources().getColor(cs.get(0).getColor_source(), null)));
+
+        sea_animal_fill_1.setImageResource(sas.get(animalNumber).getSeaAnimalOutline());
         ImageViewCompat.setImageTintList(sea_animal_outline_1,
                 ColorStateList.valueOf(getResources().getColor(cs.get(0).getColor_source(), null)));
 
@@ -154,41 +154,33 @@ public class MainActivity extends AppCompatActivity {
         ImageViewCompat.setImageTintList(sea_animal_outline_2,
                 ColorStateList.valueOf(getResources().getColor(cs.get(1).getColor_source(), null)));
 
+        sea_animal_fill_2.setImageResource(sas.get(animalNumber).getSeaAnimalOutline());
+        ImageViewCompat.setImageTintList(sea_animal_fill_2,
+                ColorStateList.valueOf(getResources().getColor(cs.get(1).getColor_source(), null)));
+
+
         //sea animal one with color at ca.get(2)
         sea_animal_outline_3.setImageResource(sas.get(animalNumber).getSeaAnimalOutline());
         ImageViewCompat.setImageTintList(sea_animal_outline_3,
                 ColorStateList.valueOf(getResources().getColor(cs.get(2).getColor_source(), null)));
 
+        sea_animal_fill_3.setImageResource(sas.get(animalNumber).getSeaAnimalOutline());
+        ImageViewCompat.setImageTintList(sea_animal_fill_3,
+                ColorStateList.valueOf(getResources().getColor(cs.get(2).getColor_source(), null)));
+
+
         sea_animal_outline_1.setVisibility(View.VISIBLE);
         sea_animal_outline_2.setVisibility(View.VISIBLE);
         sea_animal_outline_3.setVisibility(View.VISIBLE);
 
+        sea_animal_outline_1.setTag("A");
+        sea_animal_outline_2.setTag("B");
+        sea_animal_outline_3.setTag("C");
+
+
     }
 
-    public int checkAnimalColorMatch(int animalOutlineNumber,seaAnimals answerMatchAnimalType,ImageView sea_animal_outline) {
-
-        int flag =0;
-        //animal number to know which animal is being checked right now
-        // answer match animal to get the colour of the answer match animal
-        // imageview to know which outline animal would be filled now
-        int i = 1;
-        answerMatchAnimalType.setAssignColour(cs.get(animalOutlineNumber).getColor_source());
-
-        if(getResources().getColor(answerMatchAnimalType.getAssignColour(),null) ==
-
-        getResources().getColor(cs.get(animalOutlineNumber).getColor_source(),null)){
-            flag =1;
-
-            Log.d("TESTING41",i+"");
-
-             /*ImageViewCompat.setImageTintList(sea_animal_outline,ColorStateList.
-                     valueOf(getResources().getColor(cs.get(animalNumber).getColor_source(),null)));*/
-            sea_animal_outline.setImageResource(answerMatchAnimalType.getSeaAnimalFill());
-            Log.d("testing43",flag+" ");
-        }
-        return flag;
-    }
-
+    @SuppressLint("ClickableViewAccessibility")
     public void setAnswerMatch(int setColor, @NonNull seaAnimals answerMatchAnimalNumber){
         //setting the answer match animal
         answerMatch.setImageResource(answerMatchAnimalNumber.getSeaAnimalOutline());
@@ -198,17 +190,144 @@ public class MainActivity extends AppCompatActivity {
         ImageViewCompat.setImageTintList(answerMatch,ColorStateList.valueOf(getResources().getColor(cs.get(setColor).getColor_source(),null)));
 
         answerMatch.setVisibility(View.VISIBLE);
+        answerMatch.setTag("1");
+
+        answerMatch.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ClipData data = ClipData.newPlainText("","");
+                View.DragShadowBuilder answerMatchShadow = new View.DragShadowBuilder(answerMatch);
+                answerMatch.startDragAndDrop(data,answerMatchShadow,answerMatch,0);
+                answerMatch.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
+        View.OnDragListener dragListener = new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                int draggy = dragEvent.getAction();
+                final ImageView Img_Being_drag = (ImageView) dragEvent.getLocalState();
+                int flag = 0;
+
+                switch (draggy){
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        Log.d("testing101",""+Img_Being_drag.getTag());
+                        if(Img_Being_drag.getTag().equals("1") && view.getTag().equals("A")){
+                            flag =1;
+
+                            sea_animal_fill_1.setImageResource(answerMatchAnimalNumber.getSeaAnimalFill());
+                            ImageViewCompat.setImageTintList(sea_animal_fill_1,ColorStateList.valueOf(getResources().getColor(cs.get(setColor).getColor_source(),null)));
+                            sea_animal_eyes_1.setImageResource(answerMatchAnimalNumber.getSeaAnimalEyes());
+
+                            sea_animal_fill_1.setVisibility(View.VISIBLE);
+                            sea_animal_eyes_1.setVisibility(View.VISIBLE);
+
+                            setAnswerMatch(1,sas.get(0));
+                            incrementUserWin();
+                        }
+                        else if(Img_Being_drag.getTag().equals("1") && view.getTag().equals("B")){
+                            flag =1;
+
+                            sea_animal_fill_2.setImageResource(answerMatchAnimalNumber.getSeaAnimalFill());
+                            ImageViewCompat.setImageTintList(sea_animal_fill_2,ColorStateList.valueOf(getResources().getColor(cs.get(setColor).getColor_source(),null)));
+                            sea_animal_eyes_2.setImageResource(answerMatchAnimalNumber.getSeaAnimalEyes());
+
+                            sea_animal_fill_2.setVisibility(View.VISIBLE);
+                            sea_animal_eyes_2.setVisibility(View.VISIBLE);
+                            setAnswerMatch(2,sas.get(0));
+                            incrementUserWin();
+                        }
+                        else if(Img_Being_drag.getTag().equals("1") && view.getTag().equals("C")){
+                            flag =1;
+
+                            sea_animal_fill_3.setImageResource(answerMatchAnimalNumber.getSeaAnimalFill());
+                            ImageViewCompat.setImageTintList(sea_animal_fill_3,ColorStateList.valueOf(getResources().getColor(cs.get(setColor).getColor_source(),null)));
+                            sea_animal_eyes_3.setImageResource(answerMatchAnimalNumber.getSeaAnimalEyes());
+
+                            sea_animal_fill_3.setVisibility(View.VISIBLE);
+                            sea_animal_eyes_3.setVisibility(View.VISIBLE);
+
+                            incrementUserWin();
+                        }
+
+                        else
+                            answerMatch.setVisibility(View.VISIBLE);
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        if(flag == 1)
+                            answerMatch.setVisibility(View.INVISIBLE);
+                        break;
+                }
+                return true;
+            }
+        };
+
+        answerMatch.setOnDragListener(dragListener);
+        sea_animal_outline_1.setOnDragListener(dragListener);
+        sea_animal_outline_2.setOnDragListener(dragListener);
+        sea_animal_outline_3.setOnDragListener(dragListener);
+
+        sea_animal_fill_1.setOnDragListener(dragListener);
+
     }
 
-    public void OnClickBubble(){
+    public void incrementUserWin(){
+        userMatched += 1;
+        if(userMatched == 3) {
+            Handler myHandler = new Handler();
+            myHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (Games <= 5) {
+                        start(Games);
+                        Games++;
+                    }
+                }
+            }, 1000);
+        }
+
+    }
+
+    public void checkAnimalColorMatch(int animalOutlineNumber,seaAnimals answerMatchAnimalType,ImageView sea_animal_outline) {
+
+        //animal number to know which animal is being checked right now
+        // answer match animal to get the colour of the answer match animal
+        // imageview to know which outline animal would be filled now
+
+        answerMatchAnimalType.setAssignColour(cs.get(animalOutlineNumber).getColor_source());
+
+       /* if(getResources().getColor(answerMatchAnimalType.getAssignColour(),null) ==
+                getResources().getColor(cs.get(animalOutlineNumber).getColor_source(),null)){
+           userMatched += 1;
+            sea_animal_outline.setImageResource(answerMatchAnimalType.getSeaAnimalFill());
+            if(userMatched == 3){
+                Handler myHandler = new Handler();
+                myHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(Games != 0)
+                            start(Games--);
+                    }
+                },1000);
+
+            } //if user matched 3 correctly
+        }//if closing*/
+
+    }
+
+
+    public void OnClickBubble(int i){
 
         bubble.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bubble.setVisibility(View.INVISIBLE);
+                OnClickAnswerMatch(i);
 
-//                sea_animal_outline.setImageResource(sas.get(0).getSeaAnimalOutline());
-//                ImageViewCompat.setImageTintList(sea_animal_outline, ColorStateList.valueOf(sas.get(0).getAssignColour()));
             }
         });
 
@@ -219,54 +338,36 @@ public class MainActivity extends AppCompatActivity {
         sea_animal_outline_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //checking the animal color match with the answer animal match
-                if(checkAnimalColorMatch(0,sas.get(animalNumber),sea_animal_outline_1) > 0) {
-                    setAnswerMatch(1, sas.get(animalNumber));
-                }
+                checkAnimalColorMatch(0,sas.get(animalNumber),sea_animal_outline_1);
+                setAnswerMatch(1, sas.get(animalNumber));
 
             }
         }); //sea_animal_outline_1.setOnClickListener ends here
-        userMatch3Outlines += 1;
-        Log.d("Testing50",userMatch3Outlines+"");
+
+
         sea_animal_outline_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //checking the animal color match with the answer animal match
-                if(checkAnimalColorMatch(1,sas.get(animalNumber),sea_animal_outline_2) > 0){
-                    setAnswerMatch(2,sas.get(animalNumber));
-
-
-                }
+                checkAnimalColorMatch(1,sas.get(animalNumber),sea_animal_outline_2);
+                setAnswerMatch(2,sas.get(animalNumber));
 
             }
         }); //sea_animal_outline_2.setOnClickListener ends here
-        userMatch3Outlines += 1;
-        Log.d("Testing50",userMatch3Outlines+"");
+
+
+
         sea_animal_outline_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //checking the animal color match with the answer animal match
-                if(checkAnimalColorMatch(2,sas.get(animalNumber),sea_animal_outline_3) > 0);
-
-
-
+                checkAnimalColorMatch(2, sas.get(animalNumber), sea_animal_outline_3);
             }
         }); //sea_animal_outline_3.setOnClickListener ends here
-        userMatch3Outlines += 1;
-        Log.d("Testing50",userMatch3Outlines+"");
-            countUserWin += 1;
 
-        Log.d("Testing52",userMatch3Outlines+1+"");
-        Log.d("Testing45",countUserWin+"");
 
-       /* if(countUserWin < 6){
-            Collections.shuffle(cs);
-            setAnswerMatch(0,sas.get(1));
-            initialStates(1);
-            OnClickBubble();
-            OnClickAnswerMatch(1);
 
-        }*/
+
     }//on click answer match ends HERE
 }
