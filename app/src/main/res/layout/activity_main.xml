@@ -16,7 +16,7 @@
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintVertical_bias="0.15"
         >
 
         <FrameLayout
@@ -158,12 +158,12 @@
             android:id="@+id/sea_animal_match"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/veh_car2"
+            android:src="@drawable/sa_4_b"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.65"
-            app:layout_constraintHorizontal_bias="0.55"
-            android:padding="@dimen/_15sdp"
+            app:layout_constraintWidth_percent="0.68"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:padding="@dimen/_14sdp"
             android:visibility="visible"
             />
         <ImageView

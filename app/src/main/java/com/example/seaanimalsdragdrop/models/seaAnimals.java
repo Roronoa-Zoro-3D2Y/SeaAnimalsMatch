@@ -5,6 +5,23 @@ import android.widget.ImageView;
 public class seaAnimals {
     int id;
     int seaAnimalOutline;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isFace() {
+        return face;
+    }
+
+    public void setFace(boolean face) {
+        this.face = face;
+    }
+
     int seaAnimalFill;
     int seaAnimalEyes;
     int assignColour;
