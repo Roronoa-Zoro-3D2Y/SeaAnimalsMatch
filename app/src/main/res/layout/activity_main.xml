@@ -61,7 +61,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/sea_animal_2"
+            android:id="@+id/sea_animal_2_frame"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +101,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/sea_animal_3"
+            android:id="@+id/sea_animal_3_frame"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,28 +151,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintWidth_percent="0.35"
         app:layout_constraintHeight_percent="0.5">
 
         <ImageView
             android:id="@+id/sea_animal_match"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/sa_4_b"
+            android:src="@drawable/veh_car2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.68"
+            app:layout_constraintWidth_percent="0.52"
             app:layout_constraintHorizontal_bias="0.5"
-            android:padding="@dimen/_14sdp"
             android:visibility="visible"
             />
+
         <ImageView
             android:id="@+id/sea_animal_bubble"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/bubble"
             android:visibility="visible"
-            />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

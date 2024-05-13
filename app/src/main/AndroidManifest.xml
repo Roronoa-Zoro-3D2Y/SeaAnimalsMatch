@@ -3,25 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/col_sea_animal"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SeaAnimalsDragDrop"
-        tools:targetApi="31">
+        android:theme="@style/Theme.SeaAnimalsDragDrop">
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
             android:exported="true">
-
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

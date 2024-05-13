@@ -9,12 +9,14 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#FB0707</color>
-    <color name="blue">#0A2FF4</color>
-    <color name="green">#4CAF50</color>
-    <color name="purple">#9C27B0</color>
-    <color name="violet">#2E029C</color>
+    <color name="blue">#072DF8</color>
+    <color name="green">#2B9C2F</color>
+    <color name="magenta">#C30EF5</color>
+    <color name="violet">#5B468F</color>
     <color name="orange">#F35810</color>
-    <color name="yellow">#F8E327</color>
-    <color name="pink">#D822D5</color>
-    <color name="gold">#CCB105</color>
+    <color name="yellow">#F1E260</color>
+    <color name="maroon">#A52E56</color>
+    <color name="olive">#466E30</color>
+    <color name="purple">#800570</color>
+    <color name="teal">#058074</color>
 </resources>
